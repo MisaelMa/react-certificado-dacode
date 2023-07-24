@@ -15,7 +15,6 @@ export default function RootLayout({
             <img
               src="/logo.png"
               width={100}
-              height={100}
               alt="Picture of the author"
             />
           </Header>
