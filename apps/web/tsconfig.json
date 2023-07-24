@@ -1,0 +1,14 @@
+{
+  "extends": "tsconfig/nextjs.json",
+  "compilerOptions": {
+    "plugins": [{ "name": "next" }],
+    "paths": {
+      "@ui/react": ["./node_modules/@ui/react/src"],
+      "@ui/react/*": ["./node_modules/@ui/react/src/*"],
+      "@crea.js/fetch": ["./node_modules/@crea.js/fetch/src"],
+      "@crea.js/fetch/*": ["./node_modules/@crea.js/fetch/src/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}
