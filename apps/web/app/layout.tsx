@@ -12,10 +12,11 @@ export default function RootLayout({
       <body>
         <div className="flex flex-col min-h-screen">
           <Header>
-            <img
+            <Image
               src="/logo.png"
-              width={100}
-              alt="Picture of the author"
+              className="ml-16"
+              width={150} height={32} priority={true}
+              alt=""
             />
           </Header>
           <main className=" bg-[#03067B]">
