@@ -12,12 +12,18 @@ export default function RootLayout({
       <body>
         <div className="flex flex-col min-h-screen">
           <Header>
-            <Image
+            <div className="flex">
+              <img src="/logo.png" alt="Imagen" className="ml-16 w-32" />
+            </div>
+
+            {/* <Image
               src="/logo.png"
               className="ml-16"
-              width={150} height={32} priority={true}
+              width={100}
+              height={100}
+              priority={true}
               alt=""
-            />
+            /> */}
           </Header>
           <main className=" bg-[#03067B]">
             <div className="mx-20 mt-10 mb-20">
