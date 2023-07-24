@@ -7,7 +7,9 @@ interface PageParams {
     page: string;
   };
 }
-export const revalidate = 60 * 60
+export function generateStaticParams() {
+  return [{ page: '1' }, { page: '2'}, { page: '3' }]
+}
 export default async function Page({ params }: PageParams) {
   const { movie, page = '1' } = params;
   const data = await getMovies(movie, {
