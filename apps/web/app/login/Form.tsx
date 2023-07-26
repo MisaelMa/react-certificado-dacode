@@ -19,7 +19,7 @@ export default function Form() {
 
     // Realizar la validación aquí, por ejemplo, verificar si el email y la contraseña no están vacíos
     if (!email || !password || !remember) {
-      alert("Por favor ingresa un correo electrónico y una contraseña.");
+      alert("Por favor ingresa un correo electrónico y una contraseña o acepto los terminos y condiciones");
       return;
     }
     try {
@@ -74,7 +74,7 @@ export default function Form() {
           onChange={(e) => setRemember(e.target.checked)}
         />
         <label className="text-white text-sm" htmlFor="remember">
-          Recordarme
+          He leido y acepto los terminos y condiciones
         </label>
       </div>
       <button

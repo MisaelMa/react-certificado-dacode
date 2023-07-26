@@ -7,35 +7,26 @@ import { getServerSession } from "next-auth";
 
 import { authOptions } from "../common/lib/auth";
 import { ButtonList } from "./components/Button";
+import Dropdown from "./components/Dropdown";
 export default async function RootLayout({
   children,
-  ...params
 }: {
   children: React.ReactNode;
-  params: Record<string, string>
 }) {
   const session = await getServerSession(authOptions);
   const { user } = session || {};
-  console.log("params",params);
-  
+
   return (
     <html lang="en">
       <body>
         <NextAuthProvider>
           <div className="flex flex-col min-h-screen">
             <Header>
-              <div className="flex">
-                <img src="/logo.png" alt="Imagen" className="ml-16 w-32" />
+              <div className="flex w-[8rem] ">
+                <img src="/logo.png" alt="Imagen" className="ml-16 " />
               </div>
 
-              {/* <Image
-              src="/logo.png"
-              className="ml-16"
-              width={100}
-              height={100}
-              priority={true}
-              alt=""
-            /> */}
+              <Dropdown></Dropdown>
             </Header>
             <main className=" bg-[#03067B]">
               <div className="mx-20 mt-10 mb-20">
@@ -44,6 +35,7 @@ export default async function RootLayout({
                     (text, index) => (
                       <ButtonList
                         href={`/${text.toLowerCase().replace(" ", "_")}`}
+                        index={index}
                         key={index}
                         text={text}
                       />
@@ -55,7 +47,7 @@ export default async function RootLayout({
             </main>
             <footer className="bg-[url('/footer.png')]  bg-cover h-72 bg-[#03067B] text-white flex   h-full">
               <div className="relative inset-x-0 bottom-0">
-                <div className="mx-10 h-[19rem] pl-10 pt-20">
+                <div className="mx-10 h-[19rem] pl-10 pt-10">
                   <div className="flex ">
                     <div className="basis-4/5">
                       <h1 className="text-2xl">
@@ -71,6 +63,12 @@ export default async function RootLayout({
                         planeación, diseño, desarrollo, implementación e
                         innovación continua de productos digitales disruptivos.
                       </p>
+                      <img
+                        src="/grupo.png"
+                        alt=""
+                        className="mt-2"
+                        style={{ maxWidth: "60%" }}
+                      />
                     </div>
                     <div className="basis-1/5"></div>
                   </div>

@@ -4,7 +4,13 @@ import { getToken } from "next-auth/jwt";
 import { withAuth } from "next-auth/middleware";
 import path from "path";
 export const config = {
-  matcher: ["/"],
+  matcher: [
+    "/",
+    "/top_rated/:path*",
+    "/popular/:path*",
+    "/now_playing/:path*",
+    "/upcoming/:path*",
+  ],
 };
 
 function isFileUrl(pathname: string) {
@@ -14,7 +20,7 @@ function isFileUrl(pathname: string) {
 }
 
 const routes = {
-  recreando: ["/"],
+  recreando: ["/", "popular", "top_rated", "now_playing", "upcoming"],
 };
 export default withAuth(
   async function middleware(req: NextRequest) {
@@ -32,6 +38,8 @@ export default withAuth(
 
 async function middlewareLocal(req: NextRequest) {
   let { pathname, origin, search, locale } = req.nextUrl.clone();
+  console.log("pathname", pathname);
+
   const url = req.nextUrl.clone();
 
   const token = await getToken({ req });
@@ -41,7 +49,6 @@ async function middlewareLocal(req: NextRequest) {
     if (isAuth) {
       return NextResponse.redirect(new URL("/", req.url));
     }
-    return null;
   }
 
   if (!isAuth && routes.recreando.some((route) => pathname.startsWith(route))) {
