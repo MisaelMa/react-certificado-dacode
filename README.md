@@ -1,3 +1,12 @@
+# Certificacion Dacode
+Nombre: Amir Misael Marin Coh
+correos: amisael.amir.misael@gmail.com
+         amir.marin@getpulpo.com
+link deploy: https://themoviedb.recreando.dev
+correo: cualquiero correo 
+contraseña: cualquiero contraseña
+
+
 # Turborepo starter
 
 This is an official starter Turborepo.
