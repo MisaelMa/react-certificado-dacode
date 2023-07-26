@@ -1,15 +1,15 @@
-'use client'
-import React, { useState } from 'react';
+"use client";
+import React, { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useSearchParams, useRouter } from "next/navigation";
 
 export default function Form() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
-const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
+  const route = useRouter();
   const searchParams = useSearchParams();
 
   const callbackUrl = searchParams.get("callbackUrl") || "/";
@@ -19,33 +19,26 @@ const [loading, setLoading] = useState(false);
 
     // Realizar la validación aquí, por ejemplo, verificar si el email y la contraseña no están vacíos
     if (!email || !password || !remember) {
-      alert('Por favor ingresa un correo electrónico y una contraseña.');
+      alert("Por favor ingresa un correo electrónico y una contraseña.");
       return;
     }
- try {
+    try {
       setLoading(true);
-      setEmail('');
-setPassword('')
+      setEmail("");
+      setPassword("");
       const res = await signIn("credentials", {
-        redirect: false,
+        redirect: true,
         email: email,
         password: password,
-         callbackUrl: '/' ,
+        callbackUrl: "/",
       });
 
       setLoading(false);
-
-      console.log(res);
-      if (!res?.error) {
-        //router.push(callbackUrl);
-      } else {
-        setError("invalid email or password");
-      }
     } catch (error: any) {
       setLoading(false);
       setError(error);
     }
-  } 
+  };
 
   return (
     <form className="w-[30rem] text-left" onSubmit={handleSubmit}>
@@ -93,4 +86,3 @@ setPassword('')
     </form>
   );
 }
-
