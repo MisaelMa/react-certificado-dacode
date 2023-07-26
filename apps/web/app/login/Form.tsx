@@ -79,7 +79,8 @@ export default function Form() {
       </div>
       <button
         type="submit"
-        className="bg-gradient-to-r from-blue-300 to-blue-600 text-white mx-4 ml-0 px-6 py-1 rounded-3xl text-base"
+        disabled={!email || !password || !remember}
+        className={` ${!email || !password || !remember ?  'bg-gray-300  focus:outline-none' : ' bg-gradient-to-r from-blue-300 to-blue-600 '} text-white mx-4 ml-0 px-6 py-1 rounded-3xl text-base`}
       >
         Crear Cuenta
       </button>
