@@ -2,6 +2,7 @@ import { Header } from "@ui/react";
 import Image from "next/image";
 
 import "./globals.css";
+import { NextAuthProvider } from "./providers";
 export default function RootLayout({
   children,
 }: {
@@ -10,6 +11,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+                <NextAuthProvider>
+
         <div className="flex flex-col min-h-screen">
           <Header>
             <div className="flex">
@@ -67,6 +70,7 @@ export default function RootLayout({
             </div>
           </footer>
         </div>
+        </NextAuthProvider>
       </body>
     </html>
   );
