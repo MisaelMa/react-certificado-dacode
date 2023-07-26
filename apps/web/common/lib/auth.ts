@@ -18,6 +18,7 @@ export const authOptions: NextAuthOptions = {
         },
         password: { label: "Password", type: "password" },
       },
+      // @ts-ignore
       async authorize(
         credentials: any,
         req: Pick<RequestInternal, "body" | "query" | "headers" | "method">
