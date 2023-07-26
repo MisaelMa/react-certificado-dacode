@@ -1,5 +1,6 @@
 import type { NextAuthOptions, RequestInternal } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { generateSession } from "../services/session.service";
 export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/login",
@@ -26,6 +27,8 @@ export const authOptions: NextAuthOptions = {
         if (!credentials?.email || !credentials.password) {
           return null;
         }
+        const token = await generateSession();
+        console.log("token", token);
 
         /*   const user = await prisma.user.findUnique({
           where: {
@@ -39,11 +42,11 @@ export const authOptions: NextAuthOptions = {
 
         return {
           id: 1, // user.id,
-          email: "", // user.email,
+          email: credentials?.email, // user.email,
           name: "amir", // user.name, */
           randomKey: "Hey cool",
+          guestSessionId: token.guest_session_id,
         };
-        return null;
       },
     }),
   ],
@@ -55,6 +58,7 @@ export const authOptions: NextAuthOptions = {
           ...session.user,
           id: token.id,
           randomKey: token.randomKey,
+          guestSessionId: token.guestSessionId,
         },
       };
     },
@@ -65,6 +69,7 @@ export const authOptions: NextAuthOptions = {
           ...token,
           id: u.id,
           randomKey: u.randomKey,
+          guestSessionId: token.guestSessionId,
         };
       }
       return token;
