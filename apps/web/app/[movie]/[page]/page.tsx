@@ -1,5 +1,5 @@
-import { getMovies } from "../../../common/services/movies.service";
 import MoviesPage from "../../components/MoviesPage";
+import { getMovies } from "../../../common/services/movies.service";
 
 interface PageParams {
   params: {
@@ -7,17 +7,20 @@ interface PageParams {
     page: string;
   };
 }
-export function generateStaticParams() {
+/* export function generateStaticParams() {
   return [{ page: '1' }, { page: '2'}, { page: '3' }]
-}
+} */
 export default async function Page({ params }: PageParams) {
-  const { movie, page = '1' } = params;
-  const data = await getMovies(movie, {
-    page,
-  },{
-      next: { revalidate: 60 * 60,tags: ['collection']  },
-      
-  });
+  const { movie, page = "1" } = params;
+  const data = await getMovies(
+    movie,
+    {
+      page,
+    },
+    {
+      next: { revalidate: 60 * 60, tags: ["collection"] },
+    }
+  );
 
   return (
     <>
