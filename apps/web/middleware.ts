@@ -47,8 +47,7 @@ async function middlewareLocal(req: NextRequest) {
   const token = await getToken({ req });
   const isAuth = !!token;
   const isAuthPage = req.nextUrl.pathname.startsWith("/login");
-  console.log("isAuth", isAuth);
-  if (!isAuth) {
+  if (!isAuth && isAuthPage) {
     return NextResponse.next();
   }
 
