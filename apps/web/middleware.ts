@@ -1,11 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { getToken } from "next-auth/jwt";
-import { withAuth } from "next-auth/middleware";
 import path from "path";
+import { withAuth } from "next-auth/middleware";
+
 export const config = {
   matcher: [
     "/",
+    "/login",
     "/top_rated/:path*",
     "/popular/:path*",
     "/now_playing/:path*",
@@ -45,6 +47,11 @@ async function middlewareLocal(req: NextRequest) {
   const token = await getToken({ req });
   const isAuth = !!token;
   const isAuthPage = req.nextUrl.pathname.startsWith("/login");
+  console.log("isAuth", isAuth);
+  if (!isAuth) {
+    return NextResponse.next();
+  }
+
   if (isAuthPage) {
     if (isAuth) {
       return NextResponse.redirect(new URL("/", req.url));
